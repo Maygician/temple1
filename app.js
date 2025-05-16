@@ -10,19 +10,38 @@ const path = require('path');
 //   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 //   next();
 // });
-wsServer.on('connection', onConnect);
-function onConnect(wsClient) {
-  console.log('Новый пользователь');
-  // отправка приветственного сообщения клиенту
-  wsClient.send('Привет');
-  wsClient.on('message', function (message) {
-    /* обработчик сообщений от клиента */
-  }),
-    wsClient.on('close', function () {
-      // отправка уведомления в консоль
-      console.log('Пользователь отключился');
-    })
+// wsServer.on('connection', onConnect);
+// function onConnect(wsClient) {
+//   console.log('Новый пользователь');
+//   // отправка приветственного сообщения клиенту
+//   wsClient.send('Привет');
+//   wsClient.on('message', function (message) {
+//     /* обработчик сообщений от клиента */
+//   }),
+//     wsClient.on('close', function () {
+//       // отправка уведомления в консоль
+//       console.log('Пользователь отключился');
+//     })
+// }
+function logToFile(logFilePath, text) {
+  if (typeof logFilePath !== 'string') {
+    throw new Error('logFilePath must be a string.');
+  }
+  if (typeof text !== 'string') {
+    throw new Error('text must be a string.');
+  }
+
+  const timestamp = new Date().toISOString();
+  const logEntry = `${timestamp}: ${text}\n`;
+
+  fs.appendFile(logFilePath, logEntry, (err) => {
+    if (err) {
+      console.error('Error appending to log file:', err);
+    }
+  });
 }
+
+
 
 app.use(cors());
 var response_table = {
@@ -35,7 +54,9 @@ var descriptions = {
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-
+app.get('/logs', (req, res) => {
+  res.send('Hello World!')
+})
 app.get('/S/:SRouteID/E/:NodeID', (req, res) => {
   console.log(req.params.SRouteID, req.params.NodeID)
 
