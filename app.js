@@ -23,18 +23,17 @@ const path = require('path');
 //       console.log('Пользователь отключился');
 //     })
 // }
-function logToFile(logFilePath, text) {
-  if (typeof logFilePath !== 'string') {
-    throw new Error('logFilePath must be a string.');
-  }
-  if (typeof text !== 'string') {
-    throw new Error('text must be a string.');
-  }
 
+const logDirectory = './logs';
+const logFile = path.join(logDirectory, 'my-app.log');
+if (!fs.existsSync(logDirectory)) {
+  fs.mkdirSync(logDirectory);
+}
+function logToFile(text) {
   const timestamp = new Date().toISOString();
   const logEntry = `${timestamp}: ${text}\n`;
 
-  fs.appendFile(logFilePath, logEntry, (err) => {
+  fs.appendFile(logFile, logEntry, (err) => {
     if (err) {
       console.error('Error appending to log file:', err);
     }
@@ -47,16 +46,54 @@ app.use(cors());
 var response_table = {
   50: "Fifty"
 }
+// Basic error handling for the file reading process
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send('Something broke!')
+})
 
 var descriptions = {
 
 }
+app.get('/log/:string_to_log', (req, res) => {
+  const stringToLog = req.params.string_to_log;
+
+  if (typeof stringToLog !== 'string' || stringToLog.trim() === '') {
+    return res.status(400).send('Invalid log string.  Must be a non-empty string.');
+  }
+
+  logToFile(stringToLog); // Append the string to the log file
+
+  res.send(`Logged: ${stringToLog}`); // Send a response to the client
+});
+function ensureLogFileExists(logFilePath) {
+  if (!fs.existsSync(logFilePath)) {
+    //Create directory if it doesn't exist
+    if (!fs.existsSync(path.dirname(logFilePath))) {
+      fs.mkdirSync(path.dirname(logFilePath), { recursive: true });
+    }
+    // Create the log file
+    fs.writeFileSync(logFilePath, ''); // Create an empty file
+    console.log(`Log file created: ${logFilePath}`);
+  }
+}
+app.get('/logs', (req, res) => {
+  ensureLogFileExists(logFile); // Guarantee file exists before reading
+
+  fs.readFile(logFile, 'utf8', (err, data) => {
+    if (err) {
+      console.error('Error reading log file:', err);
+      return res.status(500).send('Error reading log file'); // Send appropriate error response
+    }
+    res.setHeader('Content-Type', 'text/plain'); // Set correct MIME type
+    res.send(data);  // Send the entire log file content as plain text.
+  });
+});
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
-app.get('/logs', (req, res) => {
-  res.send('Hello World!')
-})
+
 app.get('/S/:SRouteID/E/:NodeID', (req, res) => {
   console.log(req.params.SRouteID, req.params.NodeID)
 
