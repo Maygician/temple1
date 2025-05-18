@@ -1,2 +1,5 @@
 213.171.25.161:3000/log/firstLine
 213.171.25.161:3000/S/3/E/1
+
+ssh user1@213.171.25.161
+node ./server/app.js

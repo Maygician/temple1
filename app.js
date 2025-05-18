@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 80
+const port = 3000
 const cors = require('cors');
 const WebSocket = require('ws');
 const fs = require('fs');
@@ -94,6 +94,8 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.get('/apply_exact_absolute_classifier_server_side/:cl_id/context/:atob_json', (req, res) => { })
+app.get('/apply_exact_relative_classifier/:cl_id', (req, res) => { })
 app.get('/S/:SRouteID/E/:NodeID', (req, res) => {
   console.log(req.params.SRouteID, req.params.NodeID)
 

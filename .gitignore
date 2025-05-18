@@ -2,3 +2,4 @@ node_modules
 logs
 install.sh
 # playground.txt
+nginx+certbot.sh
