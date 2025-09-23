@@ -3,3 +3,5 @@ logs
 install.sh
 # playground.txt
 nginx+certbot.sh
+nginx*
+quest_form.html

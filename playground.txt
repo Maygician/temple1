@@ -1,5 +1,7 @@
-213.171.25.161:3000/log/firstLine
-213.171.25.161:3000/S/3/E/1
+82.202.142.50:3000/log/firstLine
+82.202.142.50:3000/S/3/E/1
 
-ssh user1@213.171.25.161
+ssh user1@82.202.142.50
 node ./server/app.js
+
+cd .\temple_dev\From_0\Temple server\

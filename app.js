@@ -5,6 +5,7 @@ const cors = require('cors');
 const WebSocket = require('ws');
 const fs = require('fs');
 const path = require('path');
+process.title = 'maygameTemple1';
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
 //   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -175,4 +176,6 @@ function get_MJID_by_address(address) {
   return "MJID"
 }
 
-// static words. 
+// static words.
+// cd '.\temple_dev\From_0\Temple server\'
+//
