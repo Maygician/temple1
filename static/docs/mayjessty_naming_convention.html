@@ -1,0 +1,44 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mj naming</title>
+</head>
+
+<body>
+    <div>
+        <p>v - version. follows by sequence. if omited - default meanings are used. v5_t1z</p>
+        <p></p>
+        <p>t, base62 symbols representing number, until '_' - temple's prefixes. usually represents databases or other
+            channels/sources. </p>
+        <p>r - relative_routes - usualy some fields within an object. a way to ask e.g. one's name... </p>
+        <p>s - absolute routes from temple's dict let's say v5_tsd_ can be resolved to full address</p>
+        <p>e - entry (followed by b62 number) like, v5_tsd_eds</p>
+        <p>can be followed by </p>
+        <p>M +js timestamp + </p>
+    </div>
+    <div>
+        <p>Example: user is registered directly in a temple. He has public s3 bucket. address is
+            "https://s3.regru.cloud/maygician/". </p>
+        <p>p->player; each user is given short prefix (by temple) or double prefix by guild they re registered in
+            (guilds so, gZ1_p3t_... vs t31_pMJ1) </p>
+        <p>some basic classes like immutable string, etc. from temple's dict: tbc_</p>
+    </div>
+    <div>
+        <h3>Use cases</h3>
+        <ul>
+            <li>Temple's login route. player_id is bvc (decimal id 44218) tl_ebvc - returns their whole entry </li>
+            <li>This player's s3 bucket's address: tl_ebvc_r39 (default way to check one's data would be their public s3
+                bucket)</li>
+            <li>Entry of a data type, introduced by a guild, temple or player</li>
+            <li>
+                <p>Schema</p>
+                <p>params vector</p>
+            </li>
+            <li>Cached vdersion of immutable part of temple's knowledge base.</li>
+        </ul>
+    </div>
+</body>
+
+</html>

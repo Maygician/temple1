@@ -6,6 +6,7 @@ const WebSocket = require('ws');
 const fs = require('fs');
 const path = require('path');
 process.title = 'maygameTemple1';
+app.use(express.static('static'));
 // app.use((req, res, next) => {
 //   res.header("Access-Control-Allow-Origin", "*");
 //   // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -91,9 +92,9 @@ app.get('/logs', (req, res) => {
   });
 });
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hello World!')
+// })
 
 app.get('/apply_exact_absolute_classifier_server_side/:cl_id/context/:atob_json', (req, res) => { })
 app.get('/apply_exact_relative_classifier/:cl_id', (req, res) => { })

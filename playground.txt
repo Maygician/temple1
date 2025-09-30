@@ -3,5 +3,8 @@
 
 ssh user1@82.202.142.50
 node ./server/app.js
+pm2 start ./server/app.js -i max
+//-1 in place of max if u want core count -1
+https://habr.com/ru/articles/480670/
 
 cd .\temple_dev\From_0\Temple server\
